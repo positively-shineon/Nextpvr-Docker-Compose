@@ -1,0 +1,19 @@
+services:
+  nextpvr:
+    image: nextpvr/nextpvr_amd64:stable
+    container_name: nextpvr
+    network_mode: 'host'
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=America/New_York
+    ports:
+      - 8866:8866
+    volumes:
+      - /mnt/dietpi_userdata/nextpvr:/config
+      - /mnt/recordings:/recordings
+      - /mnt/dietpi_userdata/nextpvr/buffer:/buffer
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
+    restart: 'unless-stopped'
